@@ -13,5 +13,5 @@
   practice3: practice3.c
 	$(CC) -o practice3.o practice3.c $(CFLAGS)
   practice4: practice3.c
-	$(CC) -o practice3.o practice3.c $(CFLAGS)
+	$(CC) -o practice4.o practice4.c $(CFLAGS)
 

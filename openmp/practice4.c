@@ -15,7 +15,7 @@ void Suma_Vec(int* a, int* b, int* c, int size)
 
 int main(){
 
-  int size = 500000000;
+  int size = 500000;
 
   int a[size];
   int b[size];
@@ -23,4 +23,5 @@ int main(){
 
 
   Suma_Vec(a, b, c, size);
+  return 0;
 }
