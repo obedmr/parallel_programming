@@ -23,4 +23,5 @@ int main(){
   
     
   Suma_Vec(a, b, c, size);
+  return 0;
 }
