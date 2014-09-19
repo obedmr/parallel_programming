@@ -12,6 +12,7 @@
 	$(CC) -o practice2.o practice2.c $(CFLAGS)
   practice3: practice3.c
 	$(CC) -o practice3.o practice3.c $(CFLAGS)
-  practice4: practice3.c
+  practice4: practice4.c
 	$(CC) -o practice4.o practice4.c $(CFLAGS)
-
+  practice5: practice5.c 
+	$(CC) -o practice5.o practice5.c $(CFLAGS)
