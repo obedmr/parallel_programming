@@ -7,24 +7,36 @@ Lecturer  :
 #include <stdio.h>
 #include <omp.h>
 
-float dot_product(float array_a[], float array_b[]) 
+float dot_product(float array_a[], float array_b[], int size) 
 {
-  #pragma omp parallel for      \
+  int  chunk;
+  int i;
+  float result;
+
+#pragma omp for reduction(+: result)
+  for(size_t i=0; i<size; i++){
+    result += array_a[i]*array_b[i];
+  }
+
+/*  #pragma omp parallel for      \
     default(shared) private(i)  \
     schedule(static,chunk)      \
     reduction(+:result)
-  for (i=0; i < size; i++)
-    result += (array_a[i] * array_b[i]);
+    for (i=0; i < size; i++)
+      result += (array_a[i] * array_b[i]);
+*/ 
+
+  return result;
 }
 
 int main ()
 {
-  int   i, size, chunk;
+  int size;
   float array_a[100], array_b[100], result;
 
   size = 100;
-  chunk = 10;
   result = 0.0;
+  
 
   for (i=0; i < size; i++) {
     array_a[i] = i * 3.0;
@@ -33,12 +45,7 @@ int main ()
 
   double start = omp_get_wtime();
 
-  #pragma omp parallel for      \
-    default(shared) private(i)  \
-    schedule(static,chunk)      \
-    reduction(+:result)
-      for (i=0; i < size; i++)
-        result += (array_a[i] * array_b[i]);
+  dot_product(array_a, array_b, size);
 
   double end = omp_get_wtime();
 
