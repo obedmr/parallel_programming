@@ -1,3 +1,11 @@
+/*                                                                                                                   
+Parallel and Distributed Computing Class                                                                             
+OpenMP                                                                                                               
+                                                                                                                     
+Practice 3 :Parallelizing the Sum of 2 vectors
+Name       : Obed N Munoz                                                                                            
+*/
+
 #include <stdio.h>
 #include <omp.h>
 
@@ -21,7 +29,13 @@ int main(){
   int b[size];
   int c[size];
   
-    
+  printf("\nParallelizing the Sum of 2 vectors\n");
+  double start = omp_get_wtime();
+  
   Suma_Vec(a, b, c, size);
+
+  double end = omp_get_wtime();
+
+  printf("\nExecution Time = %f\n",end - start);
   return 0;
 }

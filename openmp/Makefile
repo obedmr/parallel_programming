@@ -4,7 +4,7 @@
   # compiler flags:
   #  -g    adds debugging information to the executable file
   #  -Wall turns on most, but not all, compiler warnings
-  CFLAGS  = -g -Wall -fopenmp 
+  CFLAGS  = -g -fopenmp 
 
   practice1: practice1.c
 	$(CC) -o practice1.o practice1.c $(CFLAGS)
@@ -18,3 +18,7 @@
 	$(CC) -o practice5.o practice5.c $(CFLAGS)
   practice6: practice6.c
 	$(CC) -o practice6.o practice6.c $(CFLAGS)
+  practice7: practice7.c
+	$(CC) -o practice7.o practice7.c $(CFLAGS)
+  practice8: practice8.c
+	$(CC) -o practice8.o practice8.c $(CFLAGS)

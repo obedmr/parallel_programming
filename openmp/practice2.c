@@ -1,17 +1,22 @@
-/*Ejemplo2*/
-/*Obtenemos el número de cores disponibles en nuestro equipo,
-  El ID actual y el número total de hilos*/
+/*                                                                                                                   
+Parallel and Distributed Computing Class                                                                             
+OpenMP                                                                                                               
+                                                                                                                     
+Practice 2 : Getting Number of cores and num of threads 
+Name       : Obed N Munoz                                                                                            
+*/
 #include <omp.h>
 #include <stdio.h>
 int main(){
   printf("Este es nuestro segundo ejemplo en openMP\n");
 #pragma omp parallel
-  {//inicia regiÚn paralelizable
+  {
+    //Initializing Parallel Region
     int NCPU,tid,NPR,NTHR;
-    NCPU=omp_get_num_procs();//get the number of available cores
-    tid=omp_get_thread_num();//get current thread ID
-    NPR=omp_get_num_threads();//get total number of threads
-    NTHR=omp_get_max_threads();//getnumberofthreadsrequested
+    NCPU=omp_get_num_procs();    //get the number of available cores
+    tid=omp_get_thread_num();    //get current thread ID
+    NPR=omp_get_num_threads();   //get total number of threads
+    NTHR=omp_get_max_threads();  //get number of threads requested
     if(tid==0)
       {
 	printf("%i : NCPU\t= %i\n",tid,NCPU);

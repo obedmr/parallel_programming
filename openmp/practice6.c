@@ -1,55 +1,57 @@
 /*
-Practice 6: Vector * Matrix
-Name      : Obed N Munoz
-Lecturer  : 
+Parallel and Distributed Computing Class
+OpenMP
+
+Practice 6 : Vector * Matrix
+Name       : Obed N Munoz
 */
 
 #include <stdio.h>
 #include <omp.h>
+#define SIZE 1000
 
-float dot_product(float array_a[], float array_b[], int size) 
+// Function that Parallelize Dot product
+float dot_product(float vector_a[], float vector_b[]) 
 {
-  int  chunk;
   int i;
-  float result;
+  float result = 0.0;
 
-#pragma omp for reduction(+: result)
-  for(size_t i=0; i<size; i++){
-    result += array_a[i]*array_b[i];
-  }
-
-/*  #pragma omp parallel for      \
-    default(shared) private(i)  \
-    schedule(static,chunk)      \
-    reduction(+:result)
-    for (i=0; i < size; i++)
-      result += (array_a[i] * array_b[i]);
-*/ 
-
-  return result;
+#pragma omp parallel for reduction(+:result)
+  for (i=0; i < SIZE; i++)
+    result += (vector_a[i] * vector_b[i]);
+   return result;
 }
 
 int main ()
 {
-  int size;
-  float array_a[100], array_b[100], result;
+  // Counters
+  int i, j;  
+  // Working matrix and vectors
+  float matrix[SIZE][SIZE], vector[SIZE], result[SIZE];
 
-  size = 100;
-  result = 0.0;
-  
-
-  for (i=0; i < size; i++) {
-    array_a[i] = i * 3.0;
-    array_b[i] = i * 7.0;
+  // Initializing Matrix and Vector
+  printf("\nInitializing Matrix [%d][%d] and Vector[%d] ...\n", SIZE,SIZE,SIZE);
+  for (i=0; i<SIZE; i++){
+    vector[i] = i * 5.0;
   }
 
+  for (i=0; i < SIZE; i++) {
+    for (j=0; j < SIZE; j++) {
+      matrix[i][j] = i * 3.0;
+    }
+  }
+
+  printf("\nStarting Multiplication Vector * Matrix ...\n");
   double start = omp_get_wtime();
 
-  dot_product(array_a, array_b, size);
+  // Parallelizing dot product for each column 
+  for (i=0; i < SIZE; i++){
+    result[i] = dot_product(vector, matrix[i]);
+  }
 
   double end = omp_get_wtime();
 
-  printf("Final result= %f\n",result);
-  printf("Time = %f\n",end - start);
+  printf("\nMultiplication Vector * Matrix has FINISHED\n");
+  printf("\nExecution Time = %f\n",end - start);
   return 0; 
 }
