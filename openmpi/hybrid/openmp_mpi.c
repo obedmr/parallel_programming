@@ -2,15 +2,19 @@
 Ejemplo por default de mpi+openmp
 */
 #include <stdio.h>
-#include "mpi.h"
+#include <mpi.h>
 #include <omp.h>
 int main(int argc, char *argv[]) {
   int numprocs, rank, namelen;
+
   char processor_name[MPI_MAX_PROCESSOR_NAME];
+
   int soy = 0, np = 1;
+
   MPI_Init(&argc, &argv); //inicia el paralelismo con mpi
   MPI_Comm_size(MPI_COMM_WORLD, &numprocs); //obtiene el número de proceso
   MPI_Comm_rank(MPI_COMM_WORLD, &rank); // rango. Cantidad de procesos totales
+
   MPI_Get_processor_name(processor_name, &namelen); //nombre de la computadora
 
 #pragma omp parallel default(shared) private(soy, np)
