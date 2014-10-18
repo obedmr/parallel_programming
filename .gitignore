@@ -118,3 +118,9 @@ tramp
 
 # AUCTeX auto folder
 /auto/
+
+# CUDA Files
+*.lib
+*.exe
+*.exp
+*.lib
