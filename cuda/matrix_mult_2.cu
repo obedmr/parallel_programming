@@ -27,11 +27,11 @@ int div_up(int a,int b){
   return(a/b + (a%b == 0 ? 0:1));
 }
 
-int main(void){
+int main(int argc, char* argv[]){
   float *A_h,*B_h,*C_h; // Host matrixes
   float *A_d,*B_d,*C_d;  //Device matrixes
-  int nrow = 500;  // rows
-  int ncol = 500;  // cols
+  int nrow = atoi(argv[1]);  // rows
+  int ncol = nrow;  // cols
   float N=nrow*ncol;  // number of elements
 
   //GPU Time
@@ -117,5 +117,5 @@ int main(void){
   cudaFree(A_d); 
   cudaFree(B_d); 
   cudaFree(C_d); 
-  return(0);
+  return 0;
 }
